@@ -1,0 +1,11 @@
+EMPLOYEE_ID : 사번
+FIRST_NAME : 이름
+LAST_NAME : 성
+EMAIL : 이메일
+PHONE_NUMBER : 전화번호
+HIRE_DATE : 입사날짜
+JOB_ID : 직종
+SALARY : 급여
+COMMISSION_PCT : 보너스비율
+MANAGER_ID : 상사의 사원번호
+DEPARTMENT_ID : 부서번호

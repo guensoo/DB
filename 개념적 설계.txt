@@ -1,0 +1,45 @@
+회원		주문		상품
+-----------------------------------------------------
+ID		주문번호		상품번호
+PW		주문일		상품명
+이름		ID		가격
+주소		상품번호		재고
+이메일				
+생일				
+
+
+회원		주문		상품
+-----------------------------------------------------
+ID(PK)		주문번호(PK)	상품번호(PK)
+-----------------------------------------------------
+PW		주문일		상품명
+이름		ID(FK)		가격
+주소		상품번호(FK)	재고
+이메일				
+생일
+
+USER
+--------------
+ID(PK) VARCHAR2(100)
+--------------
+PW VARCHAR2(100)
+NAME VARCHAR2(50)
+ADDRESS VARCHAR2(100)
+EMAIL VARCHAR2(50)
+BIRTH DATE
+
+ORDER
+--------------
+ORDER_NUM(PK) NUMBER
+--------------
+ORDER_DATE DATE
+ID(FK) VARCHAR2(100) => 참조하려 하는 컬럼의 타입과 크기가 일치해야 한다.
+PRODUCT_NUM(FK) NUMBER
+
+PRODUCT
+--------------
+PRODUCT_NUM(PK) NUMBER
+--------------
+PRODUCT_NAME VARCHAR2(300)
+PRODUCT_PRICE NUMBER
+PRODUCT_COUNT NUMBER
