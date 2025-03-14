@@ -467,23 +467,23 @@ INSERT INTO  월별매출 VALUES ('P003', '2019.11', '애플', 10000);
 
 SELECT * FROM 월별매출;
 
-SELECT 상품ID, 월, SUM(매출액) "매출액"
+SELECT 상품ID, 월, 회사, SUM(매출액) "매출액"
 FROM 월별매출
 GROUP BY 상품ID, 월;
 
 -- ROLLUP(속성, 속성)
 -- 계층적 그룹핑을 통해 점진적으로 소계화 총계를 계산
 -- 상품 및 월별 합계, 총 합계
-SELECT 상품ID, SUM(매출액) "매출액"
+SELECT 상품ID, 월, 회사, SUM(매출액) "매출액"
 FROM 월별매출
-GROUP BY ROLLUP(상품ID);
+GROUP BY ROLLUP(상품ID, 월, 회사);
 
 -- CUBE(A, B) : A,B그룹핑 / A그룹핑/ B그룹핑 -> A소계, B소계 / 합계
 -- 모든 가능한 조합의 그룹핑 집합을 생성하여 모든 소계와 총계를 포함
 -- 총 합계, 월별 합계, 상품별 합계
-SELECT 상품ID, 월, SUM(매출액) "매출액"
+SELECT 상품ID, 월, 회사, SUM(매출액) "매출액"
 FROM 월별매출
-GROUP BY CUBE(상품ID, 월);
+GROUP BY CUBE(상품ID, 월, 회사);
 
 -- GROUPING SETS()
 -- 사용자 정의 그룹핑 집합을 통해 원하는 조합만 선택적으로 집계할 수 있다.
