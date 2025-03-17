@@ -218,6 +218,38 @@ ON L.COUNTRY_ID = C.COUNTRY_ID;
 SELECT * FROM EMPLOYEES;
 SELECT * FROM JOBS;
 
-SELECT E.FIRST_NAME||' '||E.LAST_NAME, E.JOB_ID, J.JOB_TITLE
+SELECT E.FIRST_NAME, E.LAST_NAME, E.JOB_ID, J.JOB_TITLE
 FROM EMPLOYEES E JOIN JOBS J
 ON E.JOB_ID = J.JOB_ID;
+
+-- 사원, 부서, 지역테이블로부터 이름, 이메일, 부서번호, 부서명, 지역번호, 도시명
+-- 을 조회하되, 도시가 'Seattle'인 경우만 조회하기
+SELECT * FROM EMPLOYEES;
+SELECT E.FIRST_NAME, E.EMAIL, D.DEPARTMENT_ID, D.DEPARTMENT_NAME, L.LOCATION_ID, L.CITY
+FROM EMPLOYEES E JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID
+AND L.CITY = 'Seattle';
+
+
+SELECT E.FIRST_NAME, E.EMAIL, D.DEPARTMENT_ID, D.DEPARTMENT_NAME, L.LOCATION_ID, L.CITY
+FROM EMPLOYEES E JOIN DEPARTMENTS D ON E.MANAGER_ID = D.MANAGER_ID
+JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID
+AND L.CITY = 'Seattle';
+
+-- 1-1 sel inner join
+-- 하나의 테이블 내에서 다른 컬럼을 참조하기 위해 사용하는
+-- '자기 자신과의 조인'방법이다.
+-- 이를 통해 데이터베이스에서 한 테이블 내의 값을 다른 값과 연결할 수 있다.
+
+/* 
+SELECT a.컬럼1, b.컬럼1
+FROM 테이블A a
+JOIN 테이블A b
+ON a.열 = b.열
+*/
+
+
+SELECT e2.first_name, e2.employee_id
+FROM employees e1
+JOIN employees e2
+ON e1.employee_id = e2.MANAGER_ID;
