@@ -141,13 +141,13 @@ UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '),14, 5))
 FROM DUAL;
 SELECT UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '), 14, 5)) FROM DUAL; 
 
-SELECT 
-    CONCAT(CONCAT(upper_part, ':'), upper_substr2)
-FROM (
-    SELECT 
-        UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '), 1, 5)) AS upper_part,
-        UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '), 14, 5)) AS upper_substr2
-    FROM DUAL;
+--SELECT 
+--    CONCAT(CONCAT(upper_part, ':'), upper_substr2)
+--FROM (
+--    SELECT 
+--        UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '), 1, 5)) AS upper_part,
+--        UPPER(SUBSTR(TRIM(' Hello, Oracle SQL! '), 14, 5)) AS upper_substr2
+--    FROM DUAL;
 
 -- 'Data' 왼쪽에 '-'문자를 채워 총 10자리 문자열로 만들고
 -- 'Base'를 오른쪽에 '*'문자를 채워 총 10자리의 문자열로
