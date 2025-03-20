@@ -44,8 +44,6 @@ CALL MY_NEW_JOB_PROC('IT', 'PROGRAMER', 50, 100);
 
 SELECT * FROM JOBS;
 
-SELECT COUNT(*) INTO CNT FROM JOBS
-WHERE JOB_ID = ;
 -- SELECT ... INTO
 -- SQL쿼리문의 실행결과를 PL/SQL문의 변수에 저장하는 역할
 -- 쿼리문의 결과값을 직접 변수에 할당할 수 있다.
@@ -99,10 +97,15 @@ SELECT * FROM JOBS;
 
 -- 트리거의 종류
 -- 실행 시점에 따른 분류
+
 -- BEFORE 트리거
--- 이벤트 발생 전에 실행, 주로 데이터 유효성 검증이나 변경 전 데이터 조작에 사용
+-- 지정된 테이블에 쿼리가 실행되기 전
+-- 이벤트 발생 전에 실행, 주로 데이터 유효성 검증(넣으려는 데이터가 유효한가?)이나 변경 전 데이터 조작에 사용
+
 -- AFTER 트리거
--- 이벤트 발생 후에 실행, 주로 후속 작업 처리에 사용
+-- 지정된 테이블에 쿼리가 실행된 후
+-- 이벤트 발생 후에 실행, 주로 후속 작업 처리에 사용, 로그의 기록
+
 -- INSTEAD OF 트리거
 -- 주로 뷰(VIEW)에 대해 사용되며, 뷰에 DML작업이 수행될 때
 -- 실제 테이블에 반영될 로직을 정의할 때 사용
@@ -124,6 +127,9 @@ SELECT * FROM JOBS;
  *  변수, 상수
  * BEGIN
  *  트리거 실행시 수행할 PL/SQL코드
+ * 	INSERTING
+ * 	UPDATING
+ * 	DELETING
  * END;
  */
 
@@ -161,14 +167,19 @@ WHERE e.EMPLOYEE_ID = 100;
 -- 가상변수
 -- 오라클 트리거 내에서 자동으로 제공되는 특수한 변수
 -- 데이터 변경 전, 후의 행 값을 임시로 보관하는 역할
+
 -- :NEW
+-- DML 작업 후 새로 적용될 행의 값을 담고 있는 변수
 -- 새로 삽입되거나 수정될 행의 값을 담고 있다.
 -- INSERT, UPDATE트리거에서 주로 사용된다.
+
 -- BEFORE트리거
 -- :NEW의 값을 변경하여 입력될 데이터를 조정할 수 있다.
 -- AFTER트리거에서는 값이 읽기 전용이다.
+
 -- :OLD
 -- 삭제되거나 수정되기 전의 기존 행 값을 담고 있다.
+-- DML 작업 이전의 행 데이터를 담고 있는 변수
 -- DELETE와 UPDATE 트리거에서 사용된다.
 -- INSERT 작업에서는 기존 행이 없으므로 :OLD를 사용할 수 없다.
 
@@ -213,6 +224,7 @@ SELECT * FROM AUDIT_LOG;
 SELECT * FROM EMPLOYEES;
 
 -- 시퀀스
+-- 계속 증가하거나 감소하는 숫자를 가지고 있는 객체
 -- 테이블에 값을 추가할 때 자동으로 순차적인 정수값이 들어가도록 설정해주는 객체
 
 -- 시퀀스 생성하기
@@ -222,7 +234,8 @@ SELECT * FROM EMPLOYEES;
 -- CREAT SEQUENCE 시퀀스명
 -- Start with 1 -> 1부터 카운팅
 -- INCREMENT BY 1 -> 1씩 증가
--- CACHE 20 -> 미리 20개의 INDEX공간 확보
+-- CACHE 20 -> 미리 20개의 INDEX공간을 미리확보
+-- NOCACHE -> 1개의 INDEX공간만 확보
 
 CREATE TABLE PERSON(
 	IDX NUMBER PRIMARY KEY,
